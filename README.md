@@ -17,7 +17,8 @@ DIAGRAMA TOPOLÓGICO:
 20.0.0.1/30 20.0.0.2/30    30.0.0.1/30 30.0.0.2/30    172.16.0.254/24     172.16.0.1/24              
 192.168.0.254/24                                                          www.practico-integrador.com                             
 ||					                                  
-("NW_B":192.168.1.0/24 - Client)								                                192.168.1.1/24                                                                                      _____________________________________________________________________________________________________
+("NW_B":192.168.1.0/24 - Client)
+192.168.1.1/24                                                                                      _____________________________________________________________________________________________________
   
 *Instalar un servidor Web en un cliente en la red A escuchando en el puerto 8080.
 *Otro cliente en la Red B debe ingresar al sitio www.practico-integrador.com y ser redirigido al host con el servidor Web en la Red A.
@@ -44,7 +45,8 @@ ____________________________________________________________
 
 Ejercicios de Ruteo
 
-El objetivo es armar una topologia con Router que interconecte como mínimo 2 redes. Elija las redes e interconecte los host (de distintas redes) a traves del router.
+El objetivo es armar una topologia con Router que interconecte como mínimo 2 redes. 
+Elija las redes e interconecte los host (de distintas redes) a traves del router.
 
 * Configure el router con las interfaces fisicas y/o virtuales que necesite
 * Realize pruebas de conectividad con alguna herramienta
