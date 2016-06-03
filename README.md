@@ -25,26 +25,25 @@ ________________________________________________________________________________
 *Otro cliente en la Red B debe ingresar al sitio www.practico-integrador.com y ser redirigido al host con el servidor Web en la Red A.
 
 Para ello debe utilizar:
-* DNS (crear zona y mapas del dominio www.practico-integrador.com)
+* DNS Bind9 (crear zona y mapas del dominio www.practico-integrador.com)
 Vamos a tener que usar DNAT – Es decir cuando pongamos una URL y el DNS lo resuelva de todas formas lo forcemos a una dirección  IP de dest con DNAT.
 * Ruteo
-* IPTables
+* IPTables (DNAT)
 * Apache (instalacion por default escucha en puerto 80)
 
 Pasos sugeridos a seguir:
 * Instalar el servidor Web Apache en el cliente A y verificar que funcione locamente
-* Crear las zoas y configurar el servicio dns en el Router.
-* Configurar el Router con las 2 ips.
-* Verificar conectividad entre el router y los 2 clientes.
+* Crear las zonas y configurar el servicio dns en el Router.
+* Configurar el Router con las IP Addresses necesarias.
+* Verificar conectividad entre los router, y routers con los clientes.
 * Verificar el acceso desde el router al servidor web.
 * Verificar el acceso desde el cliente en la red B al servidor web (deberia resolverse por ruteo).
-* Aplicar reglas de firewall: 
-* para restringir el acceso via ssh solo desde las ips de ambos host.
-
+* Aplicar reglas de firewall para restringir el acceso via ssh solo desde las IPs de ambos host.
+* 
 ____________________________________________________________
 ____________________________________________________________
 
-Ejercicios de Ruteo
+Ejercicios de Ruteo previo que podría ser de utilidad
 
 El objetivo es armar una topologia con Router que interconecte como mínimo 2 redes. 
 Elija las redes e interconecte los host (de distintas redes) a traves del router.
@@ -85,7 +84,7 @@ Comprobar que trata de enviarlo via 172.16.0.1 y no la default GW 192.168.0.1
 ____________________________________________________________
 ____________________________________________________________
 
-Clase9
+Clase9 (Useful URLs and commands)
 
 Iproute2:
 https://es.wikipedia.org/wiki/Iproute2
