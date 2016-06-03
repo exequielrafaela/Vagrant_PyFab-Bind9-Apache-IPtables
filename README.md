@@ -8,7 +8,7 @@ El objetivo del practico es instalar un Router, un Firewall (pueden ser en la mi
 *Un Router con 2 interfaces de red (2 redes distintas A y B). Recordar que deberán ser 4 Routers:
 
 _____________________________________________________________________________________________________
-DIAGRAMA TOPOLÓGICO: 								                      
+DIAGRAMA TOPOLÓGICO: (CHECK iT IN RAW FORMAT!) 								                      
                         (R1/FW/DNAT(IPtables)/DNS)<=>(INTERNET GW 192.168.0.1/24)                    
 		        10.0.0.1/30        			                                     
 		         ||                                      		                     
