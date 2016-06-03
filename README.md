@@ -18,7 +18,8 @@ DIAGRAMA TOPOLÓGICO:
 192.168.0.254/24                                                          www.practico-integrador.com                             
 ||					                                  
 ("NW_B":192.168.1.0/24 - Client)
-192.168.1.1/24                                                                                      _____________________________________________________________________________________________________
+192.168.1.1/24
+_____________________________________________________________________________________________________ 
   
 *Instalar un servidor Web en un cliente en la red A escuchando en el puerto 8080.
 *Otro cliente en la Red B debe ingresar al sitio www.practico-integrador.com y ser redirigido al host con el servidor Web en la Red A.
