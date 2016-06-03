@@ -8,18 +8,18 @@ El objetivo del practico es instalar un Router, un Firewall (pueden ser en la mi
 *Un Router con 2 interfaces de red (2 redes distintas A y B). Recordar que deberán ser 4 Routers:
 
 ____________________________________________________________________________
-DIAGRAMA TOPOLÓGICO: 						           |                                                                                                                                     |
-(R1/FW/DNAT(IPtables)/DNS)<=>(INTERNET GW 192.168.0.1/24)                  |
-10.0.0.1/30	                                                           |
-||                           		                                   |
-10.0.0.2/30	 		                                           |
-(R4)<==========>(R2)<=========>(R3)<=>("NW_A": 172.16.0.0/24 - Apache:8080)|
-20.0.0.1/30     30.0.0.1/30    172.16.0.254/24 www.practico-integrador.com |  
-20.0.0.2/30     30.0.0.2/30    172.16.0.1/24                               |
-192.168.0.254/24                                                           |                         
-||					                                   |
-("NW_B":192.168.1.0/24 - Client)	  				   |			                                     192.168.1.1/24                                                             |                        
-___________________________________________________________________________|
+DIAGRAMA TOPOLÓGICO: 						                                                                                                                                                
+(R1/FW/DNAT(IPtables)/DNS)<=>(INTERNET GW 192.168.0.1/24)                  
+10.0.0.1/30	                                                           
+||                           		                                   
+10.0.0.2/30	 		                                           
+(R4)<==========>(R2)<=========>(R3)<=>("NW_A": 172.16.0.0/24 - Apache:8080)
+20.0.0.1/30     30.0.0.1/30    172.16.0.254/24 www.practico-integrador.com   
+20.0.0.2/30     30.0.0.2/30    172.16.0.1/24                               
+192.168.0.254/24                                                                                    
+||					                                   
+("NW_B":192.168.1.0/24 - Client)	  				   			                                     192.168.1.1/24                                                                                     
+___________________________________________________________________________
   
 *Instalar un servidor Web en un cliente en la red A escuchando en el puerto 8080.
 *Otro cliente en la Red B debe ingresar al sitio www.practico-integrador.com y ser redirigido al host con el servidor Web en la Red A.
