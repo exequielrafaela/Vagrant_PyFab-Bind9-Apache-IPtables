@@ -1,4 +1,4 @@
-# vagrant_UNC-3
+# Vagrant_LinuxLab3
 Vagrant and bash files for the Linux Networking 3rd Semester -  FINAL WORKSHOP
 
 PRACTICO INTEGRADOR (Será resuelto con Vagrant + VirtualBox + Bash)
