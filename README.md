@@ -1,15 +1,16 @@
 # Vagrant_LinuxLab3
-Vagrant and bash files for the Linux Networking 3rd Semester -  FINAL WORKSHOP
 
-PRACTICO INTEGRADOR (Será resuelto con Vagrant + VirtualBox + Bash)
+*_Vagrant and bash files for the Linux Networking 3rd Semester -  FINAL WORKSHOP_*
+*PRACTICO INTEGRADOR (Será resuelto con Vagrant + VirtualBox + Bash)*
 
 El objetivo del practico es instalar un Router, un Firewall (pueden ser en la misma maquina) y servicios adicionales.
 
 *Un Router con 2 interfaces de red (2 redes distintas A y B). Recordar que deberán ser 4 Routers:
 
+![alt tag](https://github.com/exequielrafaela/Vagrant_LinuxLab3/blob/Testing/images/topology_diagram.png)
 _____________________________________________________________________________________________________
 DIAGRAMA TOPOLÓGICO: (CHECK iT IN RAW FORMAT!) 								                      
-                        (R1/FW/DNAT(IPtables)/DNS)<=>(INTERNET GW 192.168.0.1/24)                    
+                        (R0/FW/DNAT(IPtables)/DNS)<=>(INTERNET GW 192.168.0.1/24)                    
 		        10.0.0.1/30        			                                     
 		         ||                                      		                     
    	      		10.0.0.2/30				 		 		             
@@ -28,22 +29,23 @@ Para ello debe utilizar:
 * DNS Bind9 (crear zona y mapas del dominio www.practico-integrador.com)
 Vamos a tener que usar DNAT – Es decir cuando pongamos una URL y el DNS lo resuelva de todas formas lo forcemos a una dirección  IP de dest con DNAT.
 * Ruteo
-* IPTables (DNAT)
+* IPTables (DNAT) / UFW
 * Apache (instalacion por default escucha en puerto 80)
 
 Pasos sugeridos a seguir:
+* Configurar los Routers
 * Instalar el servidor Web Apache en el cliente A y verificar que funcione locamente
-* Crear las zonas y configurar el servicio dns en el Router.
+* Crear las zonas y configurar el servicio dns en el Router 0.
 * Configurar el Router con las IP Addresses necesarias.
 * Verificar conectividad entre los router, y routers con los clientes.
 * Verificar el acceso desde el router al servidor web.
 * Verificar el acceso desde el cliente en la red B al servidor web (deberia resolverse por ruteo).
-* Aplicar reglas de firewall para restringir el acceso via ssh solo desde las IPs de ambos host.
-* 
+* Aplicar reglas de firewall para restringir el acceso via ssh solo desde las IPs de ambos host y realizar NAT y redireccion a la ip real del servidor web.
+
 ____________________________________________________________
 ____________________________________________________________
 
-Ejercicios de Ruteo previo que podría ser de utilidad
+*Ejercicios de Ruteo previo que podría ser de utilidad*
 
 El objetivo es armar una topologia con Router que interconecte como mínimo 2 redes. 
 Elija las redes e interconecte los host (de distintas redes) a traves del router.
@@ -61,7 +63,7 @@ Tener en cuenta:
 ____________________________________________________________
 ____________________________________________________________
 
-Tips Armar Router Linux
+*Tips Armar Router Linux*
 
 1) ip link set eth0 up
 2) ip addr add 192.168.0.2/24 dev eth0 (ip addr del 192.168.0.2/24 dev eth0)
@@ -84,7 +86,7 @@ Comprobar que trata de enviarlo via 172.16.0.1 y no la default GW 192.168.0.1
 ____________________________________________________________
 ____________________________________________________________
 
-Clase9 (Useful URLs and commands)
+*Clase9 (Useful URLs and commands)*
 
 Iproute2:
 https://es.wikipedia.org/wiki/Iproute2
