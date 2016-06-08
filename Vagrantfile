@@ -14,6 +14,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     fw_nat_dns.vm.box = "hashicorp/precise64"
     fw_nat_dns.vm.hostname = "bind9"
     fw_nat_dns.vm.network "public_network", bridge: "wlan0", auto_config: false
+    fw_nat_dns.vm.network "public_network", bridge: "wlan0", auto_config: false
+    fw_nat_dns.vm.network "public_network", bridge: "wlan0", auto_config: false
     #fw_nat_dns.vm.network "private_network", ip: "10.0.0.1", netmask: "255.255.255.252"
     #fw_nat_dns.vm.network "public_network", bridge: "wlan0"#, auto_config: false
     #fw_nat_dns.vm.network "private_network", ip: "10.0.0.1", netmask: "255.255.255.252"
@@ -52,12 +54,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
     router3.vm.provision :shell ,path: "bootstrap_router3.sh"
   end
-  config.vm.define "router4" do |router4|
-    router4.vm.box = "hashicorp/precise64"
-    router4.vm.hostname = "router4"
-    router4.vm.network "private_network", ip: "20.0.0.1", auto_config: false
-    router4.vm.network "private_network", ip: "192.168.1.254", auto_config: false
-    router4.vm.provider :virtualbox do |vb|
+  config.vm.define "router1" do |router1|
+    router1.vm.box = "hashicorp/precise64"
+    router1.vm.hostname = "router1"
+    router1.vm.network "private_network", ip: "20.0.0.1", auto_config: false
+    router1.vm.network "private_network", ip: "192.168.1.254", auto_config: false
+    router1.vm.provider :virtualbox do |vb|
       vb.memory = 512
       vb.cpus = 1
     end
