@@ -12,7 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.define "fw_nat_dns", primary: true do |fw_nat_dns|
     fw_nat_dns.vm.box = "hashicorp/precise64"
-    fw_nat_dns.vm.hostname = "bind9"
+    fw_nat_dns.vm.hostname = "fw-dns1"
     fw_nat_dns.vm.network "public_network", bridge: "wlan0", auto_config: false
     fw_nat_dns.vm.network "public_network", bridge: "wlan0", auto_config: false
     fw_nat_dns.vm.network "public_network", bridge: "wlan0", auto_config: false
@@ -26,6 +26,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     fw_nat_dns.vm.provision :shell ,path: "bootstrap_fw_nat_dns.sh"
   end
  
+  config.vm.define "dns2", primary: true do |dns2|
+    dns2.vm.box = "hashicorp/precise64"
+    dns2.hostname = "dns2"
+    dns2.network "public_network", bridge: "wlan0", auto_config: false
+    #fw_nat_dns.vm.network "private_network", ip: "10.0.0.1", netmask: "255.255.255.252"
+    #fw_nat_dns.vm.network "public_network", bridge: "wlan0"#, auto_config: false
+    #fw_nat_dns.vm.network "private_network", ip: "10.0.0.1", netmask: "255.255.255.252"
+    dns2.vm.provider :virtualbox do |vb|
+      vb.memory = 512
+      vb.cpus = 1
+    end
+    dns2.vm.provision :shell ,path: "bootstrap_dns2.sh"
+  end
+
   config.vm.define "router2" do |router2|
     router2.vm.box = "hashicorp/precise64"
     router2.vm.hostname = "router2"
@@ -63,7 +77,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.memory = 512
       vb.cpus = 1
     end
-    router4.vm.provision :shell ,path: "bootstrap_router4.sh"
+    router1.vm.provision :shell ,path: "bootstrap_router1.sh"
   end
   config.vm.define "web" do |web|
     web.vm.box = "hashicorp/precise64"
