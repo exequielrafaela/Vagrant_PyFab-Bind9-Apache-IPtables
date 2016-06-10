@@ -12,7 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.define "fw_nat_dns", primary: true do |fw_nat_dns|
     fw_nat_dns.vm.box = "hashicorp/precise64"
-    fw_nat_dns.vm.hostname = "fw-dns1"
+    fw_nat_dns.vm.hostname = "fwdns1"
     fw_nat_dns.vm.network "public_network", bridge: "wlan0", auto_config: false
     fw_nat_dns.vm.network "public_network", bridge: "wlan0", auto_config: false
     fw_nat_dns.vm.network "public_network", bridge: "wlan0", auto_config: false
@@ -25,11 +25,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
     fw_nat_dns.vm.provision :shell ,path: "bootstrap_fw_nat_dns.sh"
   end
- 
-  config.vm.define "dns2", primary: true do |dns2|
+
+  config.vm.define "dns2" do |dns2|
     dns2.vm.box = "hashicorp/precise64"
-    dns2.hostname = "dns2"
-    dns2.network "public_network", bridge: "wlan0", auto_config: false
+    dns2.vm.hostname = "dns2"
+    dns2.vm.network "public_network", bridge: "wlan0", auto_config: false
     #fw_nat_dns.vm.network "private_network", ip: "10.0.0.1", netmask: "255.255.255.252"
     #fw_nat_dns.vm.network "public_network", bridge: "wlan0"#, auto_config: false
     #fw_nat_dns.vm.network "private_network", ip: "10.0.0.1", netmask: "255.255.255.252"
@@ -71,8 +71,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "router1" do |router1|
     router1.vm.box = "hashicorp/precise64"
     router1.vm.hostname = "router1"
-    router1.vm.network "private_network", ip: "20.0.0.1", auto_config: false
-    router1.vm.network "private_network", ip: "192.168.1.254", auto_config: false
+    router1.vm.network "public_network", bridge: "wlan0", auto_config: false
+    router1.vm.network "public_network", bridge: "wlan0", auto_config: false
+    #router1.vm.network "private_network", ip: "20.0.0.1", auto_config: false
+    #router1.vm.network "private_network", ip: "192.168.1.254", auto_config: false
     router1.vm.provider :virtualbox do |vb|
       vb.memory = 512
       vb.cpus = 1
@@ -82,7 +84,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "web" do |web|
     web.vm.box = "hashicorp/precise64"
     web.vm.hostname = "apache"
-    web.vm.network "private_network", ip: "172.16.0.1", auto_config: false
+    web.vm.network "public_network", bridge: "wlan0", auto_config: false
+    #web.vm.network "private_network", ip: "172.16.0.1", auto_config: false
     # accessing "localhost:8080" will access port 80 on the guest machine.
     web.vm.network :forwarded_port, guest: 80, host: 8080
     web.vm.provider :virtualbox do |vb|
@@ -94,7 +97,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "linux" do |linux|
     linux.vm.box = "hashicorp/precise64"
     linux.vm.hostname = "client"
-    linux.vm.network "private_network", ip: "172.16.0.1", auto_config: false
+    linux.vm.network "public_network", bridge: "wlan0", auto_config: false
+    #linux.vm.network "private_network", ip: "172.16.0.1", auto_config: false
     linux.vm.provider :virtualbox do |vb|
       vb.memory = 512
       vb.cpus = 1

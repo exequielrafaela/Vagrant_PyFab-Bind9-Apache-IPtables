@@ -24,8 +24,8 @@ sudo ip route add default via 192.168.1.1 dev eth1
 sudo echo nameserver 192.168.1.1 >> /etc/resolv.conf
 sudo ip route del default via 10.0.2.2 dev eth0
 
-apt-get update
-apt-get install inetutils-traceroute traceroute
+#apt-get update
+#apt-get install inetutils-traceroute traceroute
 
 echo "##########################"
 echo "## NETWORK CONFIGURATION #"

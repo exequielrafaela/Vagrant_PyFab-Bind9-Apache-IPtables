@@ -22,7 +22,7 @@ sudo ip route add 172.16.0/24 via 192.168.1.2
 sudo ip route add 172.16.1.0/24 via 192.168.0.1
 
 echo "##########################"
-echo -n"#### Inicio Firewall ####"
+echo "#### Inicio Firewall ####"
 echo "##########################"
 
 ## FLUSH/Borrado de reglas
