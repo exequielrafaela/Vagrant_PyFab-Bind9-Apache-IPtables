@@ -26,32 +26,34 @@ echo "#### Inicio Firewall ####"
 echo "##########################"
 
 ## FLUSH/Borrado de reglas
-#FLush
-iptables -F
-#Delete User Chains
-iptables -X
-#Reset Counter
-iptables -Z
-#Delete Chains Nat Table
-iptables -t nat -F
+##FLush
+#iptables -F
+##Delete User Chains
+#iptables -X
+##Reset Counter
+#iptables -Z
+##Delete Chains Nat Table
+#iptables -t nat -F
 
 ## Establecemos politica por defecto
 #iptables -P INPUT DROP
-iptables -P INPUT ACCEPT
-iptables -P OUTPUT ACCEPT
-iptables -P FORWARD DROP
-iptables -t nat -P PREROUTING ACCEPT
-iptables -t nat -P POSTROUTING ACCEPT
+#iptables -P INPUT ACCEPT
+#iptables -P OUTPUT DROP
+#iptables -P OUTPUT ACCEPT
+#iptables -P FORWARD DROP
+#iptables -P FORWARD ACCEPT
+#iptables -t nat -P PREROUTING ACCEPT
+#iptables -t nat -P POSTROUTING ACCEPT
 
-iptables -I INPUT -i lo -j ACCEPT
-iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-iptables -A OUTPUT -m state --state NEW,ESTABLISHED -j ACCEPT
+#iptables -I INPUT -i lo -j ACCEPT
+#iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+#iptables -A OUTPUT -m state --state NEW,ESTABLISHED -j ACCEPT
 
 ## Reglas personalizadas
-iptables -t nat -A PREROUTING -i eth2 -d 192.168.0.2 -p tcp --dport 80 -j DNAT --to-destination 172.16.0.1:8080
-iptables -t nat -A PREROUTING -i eth2 -d 192.168.1.1 -p tcp --dport 80 -j DNAT --to-destination 172.16.0.1:8080
+#iptables -t nat -A PREROUTING -i eth2 -d 192.168.0.2 -p tcp --dport 80 -j DNAT --to-destination 172.16.0.1:8080
+#iptables -t nat -A PREROUTING -i eth2 -d 192.168.1.1 -p tcp --dport 80 -j DNAT --to-destination 172.16.0.1:8080
 
-iptables -A INPUT -j DROP
+#iptables -A INPUT -j DROP
 
 echo "######################################"
 echo "Fin Firewall . Verificar: iptables -nL"
