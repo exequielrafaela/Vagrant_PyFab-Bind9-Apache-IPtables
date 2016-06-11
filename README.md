@@ -72,7 +72,7 @@ Verificar si es 0 (desactivado) o 1 (activado)
 sudo echo 1 >> /proc/sys/net/ipv4/ip_forward (On the Fly)
 vi /etc/sysctl.conf => Descomentar net.ipv4.ip_forward=1 (De forma permanente)
 6) sudo vi /etc/selinux/config => SELINUX=permissive
-7) Deteber AppArmor & UFW
+7) Detener AppArmor & UFW
 8)sudo /etc/init.d/iptables stop
 Luego aplicar reglas necesarias
 9)sudo ip route add 200.16.16.61/32 via 172.16.0.1
