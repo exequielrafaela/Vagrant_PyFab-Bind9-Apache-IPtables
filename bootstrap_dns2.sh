@@ -1,7 +1,7 @@
 #ª/user/bin/env bash
-apt-get update
-sudo apt-get install bind9 dnsutils bind9utils bind9-doc
-apt-get install inetutils-traceroute traceroute
+sudo apt-get -y update
+sudo apt-get -y install bind9 bind9utils bind9-doc
+sudo apt-get -y install inetutils-traceroute traceroute vim
 
 echo "##########################"
 echo "### STARTING NET CONF ####"
@@ -16,6 +16,27 @@ sudo service apparmor teardown
 sudo ip route add default via 172.16.2.254 dev eth1
 sudo echo nameserver 192.168.1.1 >> /etc/resolv.conf
 sudo ip route del default via 10.0.2.2 dev eth0
+sudo ip route del default via 10.0.2.2 dev eth0 metric 100
+
+#vagrant@dns2:~$ ip route 
+#default via 172.16.2.254 dev eth1 
+#10.0.2.0/24 dev eth0  proto kernel  scope link  src 10.0.2.15 
+#172.16.2.0/24 dev eth1  proto kernel  scope link  src 172.16.2.1 
+
+echo "##########################"
+echo "###### 1ry DNS CONF ######"
+echo "##########################"
+sudo cp /vagrant/NS2/hosts /etc/hosts
+sudo cp /vagrant/NS2/bind9 /etc/default/bind9
+sudo cp /vagrant/NS2/bind/named.conf.local /etc/bind/
+sudo cp /vagrant/NS2/bind/named.conf.options /etc/bind/
+sudo mkdir /etc/bind/zones
+sudo cp /vagrant/NS2/bind/zones/db.practico-integrador.com /etc/bind/zones
+sudo cp /vagrant/NS2/bind/zones/db.3.168.192  /etc/bind/zones
+sudo cp /vagrant/NS2/bind/zones/db.1.168.192  /etc/bind/zones
+sudo cp /vagrant/NS2/bind/zones/db.2.16.172  /etc/bind/zones
+sudo service bind9 restart
+
 
 echo "##########################"
 echo "#### Inicio Firewall ####"

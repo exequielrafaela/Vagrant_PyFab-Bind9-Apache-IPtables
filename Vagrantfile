@@ -19,6 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #fw_nat_dns.vm.network "private_network", ip: "10.0.0.1", netmask: "255.255.255.252"
     #fw_nat_dns.vm.network "public_network", bridge: "wlan0"#, auto_config: false
     #fw_nat_dns.vm.network "private_network", ip: "10.0.0.1", netmask: "255.255.255.252"
+    #fw_nat_dns.vm.synced_folder "/home/delivery/vagrant_projects/Vagrant_LinuxLab3/", "/home/vagrant/" 
     fw_nat_dns.vm.provider :virtualbox do |vb|
       vb.memory = 512
       vb.cpus = 1
@@ -43,7 +44,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "router2" do |router2|
     router2.vm.box = "hashicorp/precise64"
     router2.vm.hostname = "router2"
-    router2.vm.network "public_network", bridge: "wlan0", auto_config: false
+    router2.vm.network "public_network", bridge: "wlan0"#, auto_config: false
     router2.vm.network "public_network", bridge: "wlan0", auto_config: false
     router2.vm.network "public_network", bridge: "wlan0", auto_config: false
     #router2.vm.network "private_network", ip: "10.0.0.2", auto_config: false
@@ -88,6 +89,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #web.vm.network "private_network", ip: "172.16.0.1", auto_config: false
     # accessing "localhost:8080" will access port 80 on the guest machine.
     web.vm.network :forwarded_port, guest: 80, host: 8080
+    web.vm.synced_folder "/home/delivery/vagrant_projects/Vagrant_LinuxLab3/site/", "/vagrant/"
     web.vm.provider :virtualbox do |vb|
       vb.memory = 512
       vb.cpus = 1
