@@ -1,0 +1,20 @@
+;
+; BIND reverse data file for local loopback interface
+;
+$TTL	604800
+@	IN	SOA	ns1.practico-integrador.com. admin.practico-integrador.com. (
+			      2		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+;@	IN	NS	localhost.
+;1.0.0	IN	PTR	localhost.
+
+;name servers - NS records
+;	IN 	NS	ns1.practico-integrador.com.
+	IN	NS	ns2.practico-integrador.com.
+
+; PTR Records
+1	IN 	PTR	ns2.practico-integrador.com.
