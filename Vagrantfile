@@ -93,7 +93,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     web.vm.network "public_network", bridge: "wlan0", auto_config: false
     # accessing "localhost:8080" will access port 80 on the guest machine.
     web.vm.network :forwarded_port, guest: 8080, host: 8080
-    web.vm.synced_folder "/home/delivery/vagrant_projects/Vagrant_LinuxLab3/site/", "/vagrant/"
+    web.vm.synced_folder "/home/delivery/vagrant_projects/Vagrant_LinuxLab3/www/", "/vagrant/"
     web.vm.provider :virtualbox do |vb|
       vb.memory = 512
       vb.cpus = 1

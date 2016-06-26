@@ -345,11 +345,10 @@ def web():
 		print colored('##########################', 'blue')
 		print colored('#### APACHE2 WEB_SERV ####', 'blue')
 		print colored('##########################', 'blue')
-		run('cd /var/www/')
-		sudo('wget -E -H -k -K -p http://www.binbash.com.ar')
+		sudo('wget -P /var/www/ -E -H -k -K -p http://www.binbash.com.ar')
 		sudo('cp -r /var/www/www.binbash.com.ar/* /var/www/')
 		sudo('echo "ServerName localhost" >> /etc/apache2/apache2.conf')
-		sudo('cp /vagrant/www/Apache2/ports.conf /etc/apache2/ports.conf')
+		sudo('cp /vagrant/Apache2/ports.conf /etc/apache2/ports.conf')
 		sudo('service apache2 restart')
 
 		print colored('##########################', 'blue')
