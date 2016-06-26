@@ -16,15 +16,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     fw_nat_dns.vm.network "public_network", bridge: "wlan0", auto_config: false
     fw_nat_dns.vm.network "public_network", bridge: "wlan0", auto_config: false
     fw_nat_dns.vm.network "public_network", bridge: "wlan0", auto_config: false
-    #fw_nat_dns.vm.network "private_network", ip: "10.0.0.1", netmask: "255.255.255.252"
-    #fw_nat_dns.vm.network "public_network", bridge: "wlan0"#, auto_config: false
-    #fw_nat_dns.vm.network "private_network", ip: "10.0.0.1", netmask: "255.255.255.252"
-    #fw_nat_dns.vm.synced_folder "/home/delivery/vagrant_projects/Vagrant_LinuxLab3/", "/home/vagrant/" 
     fw_nat_dns.vm.provider :virtualbox do |vb|
       vb.memory = 512
       vb.cpus = 1
     end
-    #fw_nat_dns.vm.provision :shell ,path: "bootstrap_fw_nat_dns.sh"
     fw_nat_dns.vm.provision :fabric do |fabric|
       fabric.fabfile_path = "./fabfile.py"
       fabric.tasks = ["fw_nat_dns", ]
@@ -35,14 +30,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     dns2.vm.box = "hashicorp/precise64"
     dns2.vm.hostname = "dns2"
     dns2.vm.network "public_network", bridge: "wlan0", auto_config: false
-    #fw_nat_dns.vm.network "private_network", ip: "10.0.0.1", netmask: "255.255.255.252"
-    #fw_nat_dns.vm.network "public_network", bridge: "wlan0"#, auto_config: false
-    #fw_nat_dns.vm.network "private_network", ip: "10.0.0.1", netmask: "255.255.255.252"
     dns2.vm.provider :virtualbox do |vb|
       vb.memory = 512
       vb.cpus = 1
     end
-    #dns2.vm.provision :shell ,path: "bootstrap_dns2.sh"
     dns2.vm.provision :fabric do |fabric|
       fabric.fabfile_path = "./fabfile.py"
       fabric.tasks = ["dns2", ]
@@ -52,17 +43,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "router2" do |router2|
     router2.vm.box = "hashicorp/precise64"
     router2.vm.hostname = "router2"
-    router2.vm.network "public_network", bridge: "wlan0"#, auto_config: false
     router2.vm.network "public_network", bridge: "wlan0", auto_config: false
     router2.vm.network "public_network", bridge: "wlan0", auto_config: false
-    #router2.vm.network "private_network", ip: "10.0.0.2", auto_config: false
-    #router2.vm.network "private_network", ip: "20.0.0.2", auto_config: false
-    #router2.vm.network "private_network", ip: "30.0.0.1", auto_config: false
+    router2.vm.network "public_network", bridge: "wlan0", auto_config: false
     router2.vm.provider :virtualbox do |vb|
       vb.memory = 512
       vb.cpus = 1
     end
-    #router2.vm.provision :shell ,path: "bootstrap_router2.sh"
     router2.vm.provision :fabric do |fabric|
       fabric.fabfile_path = "./fabfile.py"
       fabric.tasks = ["router2", ]
@@ -75,13 +62,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     router3.vm.hostname = "router3"  
     router3.vm.network "public_network", bridge: "wlan0", auto_config: false
     router3.vm.network "public_network", bridge: "wlan0", auto_config: false
-    #router3.vm.network "private_network", ip: "30.0.0.2", auto_config: false
-    #router3.vm.network "private_network", ip: "172.16.0.254", auto_config: false
     router3.vm.provider :virtualbox do |vb|
       vb.memory = 512
       vb.cpus = 1
     end
-    #router3.vm.provision :shell ,path: "bootstrap_router3.sh"
     router3.vm.provision :fabric do |fabric|
       fabric.fabfile_path = "./fabfile.py"
       fabric.tasks = ["router3", ]
@@ -93,13 +77,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     router1.vm.hostname = "router1"
     router1.vm.network "public_network", bridge: "wlan0", auto_config: false
     router1.vm.network "public_network", bridge: "wlan0", auto_config: false
-    #router1.vm.network "private_network", ip: "20.0.0.1", auto_config: false
-    #router1.vm.network "private_network", ip: "192.168.1.254", auto_config: false
     router1.vm.provider :virtualbox do |vb|
       vb.memory = 512
       vb.cpus = 1
     end
-    #router1.vm.provision :shell ,path: "bootstrap_router1.sh"
     router1.vm.provision :fabric do |fabric|
       fabric.fabfile_path = "./fabfile.py"
       fabric.tasks = ["router1", ]
@@ -110,7 +91,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     web.vm.box = "hashicorp/precise64"
     web.vm.hostname = "apache"
     web.vm.network "public_network", bridge: "wlan0", auto_config: false
-    #web.vm.network "private_network", ip: "172.16.0.1", auto_config: false
     # accessing "localhost:8080" will access port 80 on the guest machine.
     web.vm.network :forwarded_port, guest: 8080, host: 8080
     web.vm.synced_folder "/home/delivery/vagrant_projects/Vagrant_LinuxLab3/site/", "/vagrant/"
@@ -118,7 +98,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.memory = 512
       vb.cpus = 1
     end
-    #web.vm.provision :shell ,path: "bootstrap_web.sh"
     web.vm.provision :fabric do |fabric|
       fabric.fabfile_path = "./fabfile.py"
       fabric.tasks = ["web", ]
@@ -129,12 +108,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     linux.vm.box = "hashicorp/precise64"
     linux.vm.hostname = "client"
     linux.vm.network "public_network", bridge: "wlan0", auto_config: false
-    #linux.vm.network "private_network", ip: "172.16.0.1", auto_config: false
     linux.vm.provider :virtualbox do |vb|
       vb.memory = 512
       vb.cpus = 1
     end
-    #linux.vm.provision :shell ,path: "bootstrap_client.sh"
     linux.vm.provision :fabric do |fabric|
       fabric.fabfile_path = "./fabfile.py"
       fabric.tasks = ["linux", ]
