@@ -9,7 +9,7 @@ def fw_nat_dns():
 
 		sudo('apt-get -y update')
 		sudo('apt-get -y install bind9 bind9utils bind9-doc')
-		sudo('apt-get -y install inetutils-traceroute traceroute vim')
+		sudo('apt-get -y install inetutils-traceroute traceroute tcpdump nmap vim')
 
 		print colored('##########################', 'blue')
 		print colored('### STARTING NET CONF ####', 'blue')
@@ -74,15 +74,30 @@ def fw_nat_dns():
 		sudo('ip6tables -P INPUT ACCEPT')
 		sudo('ip6tables -P FORWARD ACCEPT')
 		sudo('ip6tables -P OUTPUT ACCEPT')
+		
+		#To start Ipv4 based iptables firewall, enter:
 		sudo('iptables -t nat -A PREROUTING -i eth2 -d 192.168.1.1 -p tcp --dport 80 -j DNAT --to-destination 172.16.0.1:8080')
 		sudo('iptables -t nat -A PREROUTING -i eth1 -d 192.168.3.2 -p tcp --dport 80 -j DNAT --to-destination 172.16.0.1:8080')
+		sudo('iptables -t nat -A PREROUTING -i eth1 -d 172.16.2.1 -p tcp --dport 80 -j DNAT --to-destination 172.16.0.1:8080')
+		sudo('iptables -A INPUT -p tcp -s 10.0.2.2 --dport ssh -j ACCEPT')
+		sudo('iptables -A INPUT -p tcp -s 172.16.0.1 --dport ssh -j ACCEPT')
+		sudo('iptables -A INPUT -p tcp -s 172.16.1.1 --dport ssh -j ACCEPT')
+		sudo('iptables -A INPUT -p tcp -s 172.16.2.1 --dport ssh -j ACCEPT')
+		sudo('iptables -A INPUT -p tcp -s 0.0.0.0/0 --dport ssh -j DROP')
 
 		print colored('######################################', 'blue')
-		print colored('END FIREWALL - Verificar: iptables -nL', 'blue')
+		print colored('END FIREWALL - NAT TABLE STATUS:      ', 'blue')
 		print colored('######################################', 'blue')
 		with hide ('output'):
-			fw=sudo('iptables -nL')
-		print colored (fw, 'yellow')
+			fw=sudo('iptables -t nat -L')
+		print colored (fw, 'red')
+
+		print colored('######################################', 'blue')
+		print colored('END FIREWALL - FILTER TABLE STATUS:   ', 'blue')
+		print colored('######################################', 'blue')
+		with hide ('output'):
+			fw=sudo('iptables -L')
+		print colored (fw, 'red')
 
 		print colored('##########################', 'blue')
 		print colored('## NETWORK CONFIGURATION #', 'blue')
@@ -102,7 +117,7 @@ def dns2():
 
 		sudo('apt-get -y update')
 		sudo('apt-get -y install bind9 bind9utils bind9-doc')
-		sudo('apt-get -y install inetutils-traceroute traceroute vim')
+		sudo('apt-get -y install inetutils-traceroute traceroute tcpdump nmap vim')
 
 		print colored('##########################', 'blue')
 		print colored('### STARTING NET CONF ####', 'blue')
@@ -158,14 +173,32 @@ def dns2():
 		sudo('ip6tables -P INPUT ACCEPT')
 		sudo('ip6tables -P FORWARD ACCEPT')
 		sudo('ip6tables -P OUTPUT ACCEPT')
-		sudo('iptables -t nat -A PREROUTING -i eth1 -d 172.16.2.1 -p tcp --dport 80 -j DNAT --to-destination 172.16.0.1:8080')
 		
+		#To start Ipv4 based iptables firewall, enter:
+		sudo('iptables -t nat -A PREROUTING -i eth2 -d 192.168.1.1 -p tcp --dport 80 -j DNAT --to-destination 172.16.0.1:8080')
+		sudo('iptables -t nat -A PREROUTING -i eth1 -d 192.168.3.2 -p tcp --dport 80 -j DNAT --to-destination 172.16.0.1:8080')
+		sudo('iptables -t nat -A PREROUTING -i eth1 -d 172.16.2.1 -p tcp --dport 80 -j DNAT --to-destination 172.16.0.1:8080')
+		sudo('iptables -A INPUT -p tcp -s 10.0.2.2 --dport ssh -j ACCEPT')
+		sudo('iptables -A INPUT -p tcp -s 172.16.0.1 --dport ssh -j ACCEPT')
+		sudo('iptables -A INPUT -p tcp -s 172.16.1.1 --dport ssh -j ACCEPT')
+		sudo('iptables -A INPUT -p tcp -s 192.168.1.1 --dport ssh -j ACCEPT')
+		sudo('iptables -A INPUT -p tcp -s 192.168.3.2 --dport ssh -j ACCEPT')
+		sudo('iptables -A INPUT -p tcp -s 10.0.2.2 --dport ssh -j ACCEPT')
+		sudo('iptables -A INPUT -p tcp -s 0.0.0.0/0 --dport ssh -j DROP')
+
 		print colored('######################################', 'blue')
-		print colored('END FIREWALL - Verificar: iptables -nL', 'blue')
+		print colored('END FIREWALL - NAT TABLE STATUS:      ', 'blue')
 		print colored('######################################', 'blue')
 		with hide ('output'):
-			fw=sudo('iptables -nL')
-		print colored (fw, 'yellow')
+			fw=sudo('iptables -t nat -L')
+		print colored (fw, 'red')
+
+		print colored('######################################', 'blue')
+		print colored('END FIREWALL - FILTER TABLE STATUS:   ', 'blue')
+		print colored('######################################', 'blue')
+		with hide ('output'):
+			fw=sudo('iptables -L')
+		print colored (fw, 'red')
 
 		print colored('##########################', 'blue')
 		print colored('## NETWORK CONFIGURATION #', 'blue')
@@ -185,7 +218,7 @@ def router1():
 		print colored('##########################', 'blue')
 
 		sudo('apt-get -y update')
-		sudo('apt-get -y install inetutils-traceroute traceroute vim')
+		sudo('apt-get -y install inetutils-traceroute traceroute tcpdump nmap vim')
 
 		print colored('##########################', 'blue')
 		print colored('### STARTING NET CONF ####', 'blue')
@@ -228,7 +261,7 @@ def router2():
 		print colored('##########################', 'blue')
 
 		sudo('apt-get -y update')
-		sudo('apt-get -y install inetutils-traceroute traceroute vim')
+		sudo('apt-get -y install inetutils-traceroute traceroute tcpdump nmap vim')
 
 		print colored('##########################', 'blue')
 		print colored('### STARTING NET CONF ####', 'blue')
@@ -272,7 +305,7 @@ def router3():
 		print colored('##########################', 'blue')
 
 		sudo('apt-get -y update')
-		sudo('apt-get -y install inetutils-traceroute traceroute vim')
+		sudo('apt-get -y install inetutils-traceroute traceroute tcpdump nmap vim')
 
 		print colored('##########################', 'blue')
 		print colored('### STARTING NET CONF ####', 'blue')
@@ -315,7 +348,7 @@ def web():
 		print colored('##########################', 'blue')
 
 		sudo('apt-get -y update')
-		sudo('apt-get -y install inetutils-traceroute traceroute lynx-cur vim')
+		sudo('apt-get -y install inetutils-traceroute traceroute tcpdump nmap lynx-cur vim')
 		sudo('apt-get -y install apache2')
 		
 		sudo('if ! [ -L /var/www ]; then'
@@ -349,6 +382,7 @@ def web():
 		sudo('cp -r /var/www/www.binbash.com.ar/* /var/www/')
 		sudo('echo "ServerName localhost" >> /etc/apache2/apache2.conf')
 		sudo('cp /vagrant/Apache2/ports.conf /etc/apache2/ports.conf')
+		sudo('sudo cp /vagrant/Apache2/default /etc/apache2/sites-available/default')
 		sudo('service apache2 restart')
 
 		print colored('##########################', 'blue')
@@ -368,7 +402,7 @@ def linux():
 		print colored('##########################', 'blue')
 
 		sudo('apt-get -y update')
-		sudo('apt-get -y install inetutils-traceroute traceroute vim lynx-cur')
+		sudo('apt-get -y install inetutils-traceroute traceroute tcpdump nmap vim lynx-cur')
 
 		print colored('##########################', 'blue')
 		print colored('### STARTING NET CONF ####', 'blue')

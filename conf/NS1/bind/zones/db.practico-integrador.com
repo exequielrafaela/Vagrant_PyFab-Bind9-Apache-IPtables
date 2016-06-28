@@ -18,5 +18,8 @@ $TTL	604800
 
 ; name servers - A records
 ns1.practico-integrador.com.	IN	A	192.168.1.1
+www.practico-integrador.com.	IN	A	192.168.1.1
 ns1.practico-integrador.com.	IN	A	192.168.3.2
+www.practico-integrador.com.	IN	A	192.168.3.2
 ns2.practico-integrador.com.	IN 	A	172.16.2.1
+www.practico-integrador.com.	IN 	A	172.16.2.1
