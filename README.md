@@ -5,7 +5,7 @@
 
 El objetivo del practico es instalar un Routers, Firewall y servicios adicionales (DNS/WebServer).
 
-![alt tag](https://github.com/exequielrafaela/Vagrant_LinuxLab3/blob/Testing/images/Architecture Diagram.png)
+![alt tag](https://github.com/exequielrafaela/Vagrant_LinuxLab3/blob/master/images/Architecture Diagram.png)
 
 *Instalar un servidor Web en un cliente en la red A escuchando en el puerto 8080.
 *Otro cliente en la Red B debe ingresar al sitio www.practico-integrador.com y ser redirigido al host con el servidor Web en la Red A.
