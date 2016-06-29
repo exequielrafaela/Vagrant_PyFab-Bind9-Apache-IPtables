@@ -5,21 +5,8 @@
 
 El objetivo del practico es instalar un Routers, Firewall y servicios adicionales (DNS/WebServer).
 
-![alt tag](https://github.com/exequielrafaela/Vagrant_LinuxLab3/blob/Testing/images/topology_diagram.png)
-_____________________________________________________________________________________________________
-DIAGRAMA TOPOLÓGICO: (CHECK iT IN RAW FORMAT!) 								                      
-                        (INTERNET GW)                    
-		              192.168.0.1/24        			                                     
-		               ||                                      		                     
-   	      		      192.168.0.254/24				 		 		             
-(R1)<=====/NetA/=====>(R0-FW/NAT/DNS)<======/NetB/======>(R2)<===/NetC/===>(R3)<============>("Net_WebServer": 172.16.0.0/24 - Apache:8080) 
-192.168.3.1/30 192.168.3.2/30 // 192.168.1.1/30 192.168.1.2/30 // 192.168.2.1/30 // 172.16.0.254/24   172.16.0.1/24             
-172.16.1.254/24                                           ||      192.168.2.2/30                     www.practico-integrador.com
-||					                               172.16.2.254/24            
-("Net_Client":172.16.1.0/24)                      ("Net_DNS2": 172.16.2.0/24)
-172.16.1.1/24					                   172.16.2.1/24
-_____________________________________________________________________________________________________ 
-  
+![alt tag](https://github.com/exequielrafaela/Vagrant_LinuxLab3/blob/Testing/images/Architecture Diagram.png.png)
+
 *Instalar un servidor Web en un cliente en la red A escuchando en el puerto 8080.
 *Otro cliente en la Red B debe ingresar al sitio www.practico-integrador.com y ser redirigido al host con el servidor Web en la Red A.
 
@@ -43,93 +30,3 @@ Pasos sugeridos a seguir:
 ____________________________________________________________
 ____________________________________________________________
 
-*Ejercicios de Ruteo previo que podría ser de utilidad*
-
-El objetivo es armar una topologia con Router que interconecte como mínimo 2 redes. 
-Elija las redes e interconecte los host (de distintas redes) a traves del router.
-
-* Configure el router con las interfaces fisicas y/o virtuales que necesite
-* Realize pruebas de conectividad con alguna herramienta
-* Armar la tabla reducida de ruteo.
-
-Tener en cuenta:
-* ip forwarding esta activado
-* selinux no bloquee conexiones
-* iptables no bloquee conexiones
-* Las interfaces esten bien configuradas
-
-____________________________________________________________
-____________________________________________________________
-
-*Tips Armar Router Linux*
-
-1) ip link set eth0 up
-2) ip addr add 192.168.0.2/24 dev eth0 (ip addr del 192.168.0.2/24 dev eth0)
-3) ip addr add 172.16.0.2/24 dev eth0
-4) ip route add default via 192.168.0.1
-5) cat /proc/sys/net/ipv4/ip_forward
-Verificar si es 0 (desactivado) o 1 (activado)
-sudo echo 1 >> /proc/sys/net/ipv4/ip_forward (On the Fly)
-vi /etc/sysctl.conf => Descomentar net.ipv4.ip_forward=1 (De forma permanente)
-6) sudo vi /etc/selinux/config => SELINUX=permissive
-7) Detener AppArmor & UFW
-8)sudo /etc/init.d/iptables stop
-Luego aplicar reglas necesarias
-9)sudo ip route add 200.16.16.61/32 via 172.16.0.1
-La ip de otro router por ejemplo
-sudo ip route del 200.16.16.61
-10)traceroute www.unc.edu.ar
-Comprobar que trata de enviarlo via 172.16.0.1 y no la default GW 192.168.0.1
-
-____________________________________________________________
-____________________________________________________________
-
-*Clase9 (Useful URLs and commands)*
-
-Iproute2:
-https://es.wikipedia.org/wiki/Iproute2
-
-Iproute2 Commands:
-http://www.mauriciomatamala.net/PAR/iproute2.php
-
-Mostrar dispositivos de red y su configuración.
-	ifconfig
-	ip addr show // ip link show
-
-Activar una interfaz de red.
-	ifconfig eth0 up
-	ip link set eth0 up
-
-Desactivar una interfaz de red.
-	ifconfig eth0 down
-	ip link set eth0 down
-
-Establecer una dirección IP a una interfaz.
-	ifconfig eth0 192.168.1.1
-	ip address add 192.168.1.1 dev eth0
-
-Eliminar una dirección IP de una interfaz.
-	ifconfig no podrá hacer esto.
-	ip address del 192.168.1.1 dev eth0
-
-Añadir una interfaz virtual.
-	ifconfig eth0:1 10.0.0.1/8
-	ip addr add 10.0.0.1/8 dev eth0 label eth0:1
-
-Añadir una entrada en la tabla ARP.
-	arp -i eth0 -s 192.168.0.1 00:11:22:33:44:55
-	ip neigh add 192.168.0.1 lladdr 00:11:22:33:44:55 nud permanent dev eth0
-
-Desconectar un dispositivo ARP.
-	ifconfig -arp eth0
-	ip link set dev eth0 arp off
-
-Para configurar una tarjeta de red física, por ejemplo, con ifconfig debemos teclear lo siguiente:
-	ifconfig eth0 192.168.0.2 netmask 255.255.255.0
-	ip addr add 192.168.0.2/24 dev eth0
-
-Ver opciones
-	man ip
-
-____________________________________________________________
-____________________________________________________________
