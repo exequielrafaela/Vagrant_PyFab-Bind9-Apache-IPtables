@@ -1,0 +1,48 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+zone "practico-integrador.com" {
+    type master;
+    file "/etc/bind/zones/db.practico-integrador.com"; # zone file path
+    allow-transfer { 172.16.2.1; };         # ns2 private IP address secondary
+};
+
+zone "192.168.3.in-addr.arpa" {
+    type master;
+    file "/etc/bind/zones/db.3.168.192";  # 192.168.3.0/30 subnet
+    allow-transfer { 172.16.2.1; };     # ns2 private IP address secondary
+};
+
+zone "192.168.1.in-addr.arpa" {
+    type master;
+    file "/etc/bind/zones/db.1.168.192";  # 192.168.1.0/30 subnet
+    allow-transfer { 172.16.2.1; };     # ns2 private IP address secondary
+};
+
+zone "172.16.2.in-addr.arpa" {
+    type master;
+    file "/etc/bind/zones/db.2.16.172";  # 172.16.2.0/24 subnet
+    allow-transfer { 172.16.2.1; };     # ns2 private IP address secondary
+};
+
+//zone "172.16.0.in-addr.arpa" {
+//    type master;
+//    file "/etc/bind/zones/db.0.16.172";  # 172.16.0.0/24 subnet
+//    allow-transfer { 172.16.2.1; };     # ns2 private IP address secondary
+//};
+
+//zone "172.16.1.in-addr.arpa" {
+//    type master;
+//    file "/etc/bind/zones/db.1.16.172";  # 172.16.1.0/24 subnet
+//    allow-transfer { 172.16.2.1; };     # ns2 private IP address secondary
+//};
+
+//zone "." {
+//	type hint;
+//	file "/etc/bind/db.root";
+//};

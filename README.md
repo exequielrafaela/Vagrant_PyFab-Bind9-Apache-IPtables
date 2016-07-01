@@ -1,24 +1,23 @@
-# vagrant_UNC-3
-Vagrant and bash files for the Linux Networking 3rd Semester -  FINAL WORKSHOP
+# Vagrant_LinuxLab3
 
-PRACTICO INTEGRADOR (Será resuelto con Vagrant + VirtualBox + Bash)
+*_Vagrant and bash files for the Linux Networking 3rd Semester -  FINAL WORKSHOP_*
+*PRACTICO INTEGRADOR (Será resuelto con Vagrant + VirtualBox + Bash)*
 
-El objetivo del practico es instalar un Router, un Firewall (pueden ser en la misma maquina) y servicios adicionales.
+El objetivo del practico es instalar un Routers, Firewall y servicios adicionales (DNS/WebServer).
 
-*Un Router con 2 interfaces de red (2 redes distintas A y B). Recordar que deberán ser 4 Routers:
-
+![alt tag](https://github.com/exequielrafaela/Vagrant_LinuxLab3/blob/Testing/images/topology_diagram.png)
 _____________________________________________________________________________________________________
 DIAGRAMA TOPOLÓGICO: (CHECK iT IN RAW FORMAT!) 								                      
-                        (R1/FW/DNAT(IPtables)/DNS)<=>(INTERNET GW 192.168.0.1/24)                    
-		        10.0.0.1/30        			                                     
-		         ||                                      		                     
-   	      		10.0.0.2/30				 		 		             
-(R4)<==================>(R2)<====================>(R3)<=>("NW_A": 172.16.0.0/24 - Apache:8080)       
-20.0.0.1/30 20.0.0.2/30    30.0.0.1/30 30.0.0.2/30    172.16.0.254/24     172.16.0.1/24              
-192.168.0.254/24                                                          www.practico-integrador.com                             
-||					                                  
-("NW_B":192.168.1.0/24 - Client)
-192.168.1.1/24
+                        (INTERNET GW)                    
+		              192.168.0.1/24        			                                     
+		               ||                                      		                     
+   	      		      192.168.0.254/24				 		 		             
+(R1)<=====/NetA/=====>(R0-FW/NAT/DNS)<======/NetB/======>(R2)<===/NetC/===>(R3)<============>("Net_WebServer": 172.16.0.0/24 - Apache:8080) 
+192.168.3.1/30 192.168.3.2/30 // 192.168.1.1/30 192.168.1.2/30 // 192.168.2.1/30 // 172.16.0.254/24   172.16.0.1/24             
+172.16.1.254/24                                           ||      192.168.2.2/30                     www.practico-integrador.com
+||					                               172.16.2.254/24            
+("Net_Client":172.16.1.0/24)                      ("Net_DNS2": 172.16.2.0/24)
+172.16.1.1/24					                   172.16.2.1/24
 _____________________________________________________________________________________________________ 
   
 *Instalar un servidor Web en un cliente en la red A escuchando en el puerto 8080.
@@ -28,22 +27,23 @@ Para ello debe utilizar:
 * DNS Bind9 (crear zona y mapas del dominio www.practico-integrador.com)
 Vamos a tener que usar DNAT – Es decir cuando pongamos una URL y el DNS lo resuelva de todas formas lo forcemos a una dirección  IP de dest con DNAT.
 * Ruteo
-* IPTables (DNAT)
+* IPTables (DNAT) / UFW
 * Apache (instalacion por default escucha en puerto 80)
 
 Pasos sugeridos a seguir:
+* Configurar los Routers
 * Instalar el servidor Web Apache en el cliente A y verificar que funcione locamente
-* Crear las zonas y configurar el servicio dns en el Router.
+* Crear las zonas y configurar el servicio dns en el Router 0.
 * Configurar el Router con las IP Addresses necesarias.
 * Verificar conectividad entre los router, y routers con los clientes.
 * Verificar el acceso desde el router al servidor web.
 * Verificar el acceso desde el cliente en la red B al servidor web (deberia resolverse por ruteo).
-* Aplicar reglas de firewall para restringir el acceso via ssh solo desde las IPs de ambos host.
-* 
+* Aplicar reglas de firewall para restringir el acceso via ssh solo desde las IPs de ambos host y realizar NAT y redireccion a la ip real del servidor web.
+
 ____________________________________________________________
 ____________________________________________________________
 
-Ejercicios de Ruteo previo que podría ser de utilidad
+*Ejercicios de Ruteo previo que podría ser de utilidad*
 
 El objetivo es armar una topologia con Router que interconecte como mínimo 2 redes. 
 Elija las redes e interconecte los host (de distintas redes) a traves del router.
@@ -61,7 +61,7 @@ Tener en cuenta:
 ____________________________________________________________
 ____________________________________________________________
 
-Tips Armar Router Linux
+*Tips Armar Router Linux*
 
 1) ip link set eth0 up
 2) ip addr add 192.168.0.2/24 dev eth0 (ip addr del 192.168.0.2/24 dev eth0)
@@ -72,7 +72,7 @@ Verificar si es 0 (desactivado) o 1 (activado)
 sudo echo 1 >> /proc/sys/net/ipv4/ip_forward (On the Fly)
 vi /etc/sysctl.conf => Descomentar net.ipv4.ip_forward=1 (De forma permanente)
 6) sudo vi /etc/selinux/config => SELINUX=permissive
-7) Deteber AppArmor & UFW
+7) Detener AppArmor & UFW
 8)sudo /etc/init.d/iptables stop
 Luego aplicar reglas necesarias
 9)sudo ip route add 200.16.16.61/32 via 172.16.0.1
@@ -84,7 +84,7 @@ Comprobar que trata de enviarlo via 172.16.0.1 y no la default GW 192.168.0.1
 ____________________________________________________________
 ____________________________________________________________
 
-Clase9 (Useful URLs and commands)
+*Clase9 (Useful URLs and commands)*
 
 Iproute2:
 https://es.wikipedia.org/wiki/Iproute2
