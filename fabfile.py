@@ -384,6 +384,7 @@ def web():
 		sudo('cp /vagrant/Apache2/ports.conf /etc/apache2/ports.conf')
 		sudo('sudo cp /vagrant/Apache2/default /etc/apache2/sites-available/default')
 		sudo('service apache2 restart')
+		sudo('service apache2 restart')
 
 		print colored('##########################', 'blue')
 		print colored('## NETWORK CONFIGURATION #', 'blue')
