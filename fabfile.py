@@ -8,7 +8,7 @@ def fw_nat_dns():
 		print colored('##########################', 'blue')
 
 		sudo('apt-get -y update')
-		sudo('apt-get -y install bind9 bind9utils bind9-doc')
+		sudo('apt-get -y install bind9 bind9utils bind9-doc dnstop')
 		sudo('apt-get -y install inetutils-traceroute traceroute tcpdump nmap vim')
 
 		print colored('##########################', 'blue')
@@ -28,7 +28,7 @@ def fw_nat_dns():
 		print colored('##########################', 'blue')
 		print colored('##### STATIC ROUTING #####', 'blue')
 		print colored('##########################', 'blue')
-		sudo('ip route add 172.16.0/24 via 192.168.1.2')
+		sudo('ip route add 172.16.0.0/24 via 192.168.1.2')
 		sudo('ip route add 172.16.1.0/24 via 192.168.3.1')
 		sudo('ip route add 172.16.2.0/24 via 192.168.1.2')
 		sudo('ip route add default via 192.168.0.1 dev eth3')
@@ -116,7 +116,7 @@ def dns2():
 		print colored('##########################', 'blue')
 
 		sudo('apt-get -y update')
-		sudo('apt-get -y install bind9 bind9utils bind9-doc')
+		sudo('apt-get -y install bind9 bind9utils bind9-doc dnstop')
 		sudo('apt-get -y install inetutils-traceroute traceroute tcpdump nmap vim')
 
 		print colored('##########################', 'blue')
