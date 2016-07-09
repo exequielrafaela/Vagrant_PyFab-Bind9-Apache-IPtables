@@ -1,6 +1,6 @@
 # Vagrant_PyFab-Bind9-Apache-IPtables
 
-*_Vagrant and bash files for the Linux Networking 3rd Semester -  FINAL WORKSHOP_*
+*_Vagrant and bash files for the Linux Networking 3rd Semester GNU/Linux UNC Córdoba Argentina Diploma -  FINAL WORKSHOP_*
 *PRACTICO INTEGRADOR (Será resuelto con Vagrant + VirtualBox + Bash)*
 
 El objetivo del practico es instalar un Routers, Firewall y servicios adicionales (DNS/WebServer).
